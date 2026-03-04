@@ -1,0 +1,20 @@
+# Godot 4+ specific ignores
+godot/.godot/
+godot/.nomedia
+
+# Godot-specific ignores
+godot/.import/
+godot/export.cfg
+godot/export_credentials.cfg
+
+# Imported translations (automatically generated from CSV files)
+godot/*.translation
+
+# Mono-specific ignores
+godot/.mono/
+godot/data_*/
+godot/mono_crash.*.json
+
+# Rust
+rust/target/
+rust/Cargo.lock
