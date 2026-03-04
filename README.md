@@ -1,4 +1,4 @@
-# gd-compositor
+# gd-wm
 Wayland compositor using Godot Engine as the frontend.
 
 Project mainly exists as an excuse to finally learn Rust.
