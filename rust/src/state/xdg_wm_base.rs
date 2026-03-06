@@ -40,9 +40,9 @@ impl Dispatch<XdgWmBase, ()> for State {
 	}
 }
 
-struct XdgSurfaceData
+pub struct XdgSurfaceData
 {
-	wl_surface: WlSurface,
+	pub wl_surface: WlSurface,
 }
 
 impl Dispatch<XdgSurface, XdgSurfaceData> for State {
@@ -60,28 +60,28 @@ impl Dispatch<XdgSurface, XdgSurfaceData> for State {
 			xdg_surface::Request::GetToplevel { id } =>
 			{
 				let toplevel = data_init.init(id, XdgTopLevelData {wl_surface: data.wl_surface.clone(), xdg_surface: xdg_surface.clone()});
-
+				
 				// Initialize toplevel state in the global state
-				state.toplevels.insert(toplevel.id(), ToplevelState::new());
+				state.toplevels.insert(data.wl_surface.clone(), ToplevelState::new(toplevel));
 			}
 			_ => {}
 		}
 	}
 }
 
-struct XdgTopLevelData
+pub struct XdgTopLevelData
 {
-	wl_surface: WlSurface,
-	xdg_surface: XdgSurface,
+	pub wl_surface: WlSurface,
+	pub xdg_surface: XdgSurface,
 }
 
 impl Dispatch<XdgToplevel, XdgTopLevelData> for State {
 	fn request(
 		state: &mut Self,
 		_client: &Client,
-		resource: &XdgToplevel,
+		_resource: &XdgToplevel,
 		request: <XdgToplevel as wayland_server::Resource>::Request,
-		_data: &XdgTopLevelData,
+		data: &XdgTopLevelData,
 		_dhandle: &DisplayHandle,
 		_data_init: &mut DataInit<'_, Self>,
 	) {
@@ -89,11 +89,11 @@ impl Dispatch<XdgToplevel, XdgTopLevelData> for State {
 		{
 			xdg_toplevel::Request::SetTitle { title } =>
 			{
-				state.toplevels.get_mut(&resource.id()).unwrap().title = title;
+				state.toplevels.get_mut(&data.wl_surface).unwrap().title = title;
 			}
 			xdg_toplevel::Request::SetAppId { app_id } =>
 			{
-				state.toplevels.get_mut(&resource.id()).unwrap().app_id = app_id;
+				state.toplevels.get_mut(&data.wl_surface).unwrap().app_id = app_id;
 			}
 			_ => {}
 		}
