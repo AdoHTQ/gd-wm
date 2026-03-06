@@ -7,5 +7,7 @@ edition = "2024"
 crate-type = ["cdylib"]
 
 [dependencies]
+calloop = "0.14.4"
 godot = "0.4.5"
+wayland-protocols = { version = "0.32", features = ["server"] }
 wayland-server = "0.31.11"
