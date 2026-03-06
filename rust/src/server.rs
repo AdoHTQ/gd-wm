@@ -60,7 +60,7 @@ impl WaylandServer
 			display_handle.create_global::<State, XdgWmBase, _>(7, ());
 			display_handle.create_global::<State, WlShm, _>(2, ());
 
-			let mut state: State = State{display_handle};
+			let mut state: State = State::new(display_handle);
 
 			// Poll socket for ready connections and accept new ones
 			loop_handle.insert_source(
