@@ -8,6 +8,7 @@ Would not recommend using this as your primary compositor for now.
 - Simple window management with floating bordered windows
 - Works both opened in another compositor and directly in a tty
 - Reasonable amount of customizability
+- Character controller that can stand on windows with edge detection?
 
 # Planned Secondary Features
 - Window Physics
