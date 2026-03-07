@@ -29,7 +29,7 @@ impl ToplevelState
 
 pub struct State
 {
-	pub serial: u32,
+	serial: u32,
 	pub display_handle: DisplayHandle,
 
 	pub toplevels: HashMap<WlSurface, ToplevelState>,
@@ -45,5 +45,11 @@ impl State
 			display_handle,
 			toplevels: HashMap::new(),
 		}
+	}
+
+	pub fn get_serial(&mut self) -> u32
+	{
+		self.serial += 1;
+		self.serial - 1
 	}
 }

@@ -83,7 +83,7 @@ impl Dispatch<WlSurface, ()> for State {
 				let xdg_surface = toplevel.data::<XdgTopLevelData>().unwrap().xdg_surface.clone();
 				xdg_surface.send_event(
 					xdg_surface::Event::Configure { 
-						serial: state.serial 
+						serial: state.get_serial()
 					}
 				).expect("Could not send configure event to xdg surface.");
 			}

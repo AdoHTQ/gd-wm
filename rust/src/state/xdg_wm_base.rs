@@ -1,6 +1,6 @@
 
 
-use wayland_server::{Client, DataInit, Dispatch, DisplayHandle, GlobalDispatch, New, Resource, protocol::wl_surface::WlSurface};
+use wayland_server::{Client, DataInit, Dispatch, DisplayHandle, GlobalDispatch, New, protocol::wl_surface::WlSurface};
 use wayland_protocols::xdg::shell::server::{xdg_surface::{self, XdgSurface}, xdg_toplevel::{self, XdgToplevel}, xdg_wm_base::{self, XdgWmBase}};
 
 use crate::state::{State, ToplevelState};

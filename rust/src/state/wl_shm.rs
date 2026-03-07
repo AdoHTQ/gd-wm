@@ -38,7 +38,7 @@ impl Dispatch<WlShm, ()> for State
 		{
 			wl_shm::Request::CreatePool { id, fd, size } =>
 			{
-				data_init.init(id, ShmPoolData {fd, size});
+				data_init.init(id, ShmPoolData {_fd: fd, _size: size});
 			}
 			_ => {}
 		}
@@ -47,8 +47,8 @@ impl Dispatch<WlShm, ()> for State
 
 struct ShmPoolData
 {
-	fd: OwnedFd,
-	size: i32,
+	_fd: OwnedFd,
+	_size: i32,
 }
 
 impl Dispatch<WlShmPool, ShmPoolData> for State
@@ -67,7 +67,7 @@ impl Dispatch<WlShmPool, ShmPoolData> for State
 			wl_shm_pool::Request::CreateBuffer { id, offset, width, height, stride, format } =>
 			{
 				let buffer_format: Format = format.into_result().expect("Invalid format");
-				data_init.init(id, BufferData {offset, width, height, stride, format: buffer_format});
+				data_init.init(id, BufferData {_offset: offset, _width: width, _height:height, _stride:stride, _format: buffer_format});
 			}
 			wl_shm_pool::Request::Destroy => {}
 			wl_shm_pool::Request::Resize { size: _size } =>
@@ -81,11 +81,11 @@ impl Dispatch<WlShmPool, ShmPoolData> for State
 
 struct BufferData
 {
-	offset: i32,
-	width: i32,
-	height: i32,
-	stride: i32,
-	format: Format,
+	_offset: i32,
+	_width: i32,
+	_height: i32,
+	_stride: i32,
+	_format: Format,
 }
 
 impl Dispatch<WlBuffer, BufferData> for State
