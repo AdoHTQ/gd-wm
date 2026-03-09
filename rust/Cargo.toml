@@ -9,5 +9,6 @@ crate-type = ["cdylib"]
 [dependencies]
 calloop = "0.14.4"
 godot = "0.4.5"
+nix = { version = "0.31", features = ["mman", "fs"] }
 wayland-protocols = { version = "0.32", features = ["server"] }
 wayland-server = "0.31.11"
