@@ -115,6 +115,20 @@ impl ShmMapping
 	}
 }
 
+impl Drop for ShmMapping
+{
+	fn drop(&mut self) {
+		use nix::sys::mman::munmap;
+		use std::num::NonZeroUsize;
+
+		if let Ok(len) = NonZeroUsize::try_from(self.size) {
+			unsafe {
+				let _ = munmap(self.ptr.as_ptr() as *mut _, len);
+			}
+		}
+	}
+}
+
 
 struct ShmPoolData
 {
